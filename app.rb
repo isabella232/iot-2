@@ -1,12 +1,16 @@
 require 'sinatra'
 require 'faye'
+require 'haml'
+
+require File.expand_path('../app/device.rb', __FILE__)
 
 ROOT_DIR = File.expand_path('..', __FILE__)
 set :root, ROOT_DIR
 set :logging, false
+set :views, Proc.new { File.join(root, "app/views") }
 
 get '/' do
-  File.read(ROOT_DIR + '/app/views/index.html')
+  haml :index
 end
 
 get '/post' do
@@ -17,8 +21,9 @@ get '/post' do
   params[:message]
 end
 
+
 App = Faye::RackAdapter.new(Sinatra::Application,
-  :mount   => '/bayeux',
+  :mount   => '/iot',
   :timeout => 25
 )
 
@@ -40,3 +45,5 @@ end
 App.on(:publish) do |client_id, channel, data|
   puts "[ PUBLISH] #{client_id}, #{channel} => #{data}"
 end
+
+

@@ -25,12 +25,16 @@ GEM
     faye-websocket (0.10.2)
       eventmachine (>= 0.12.0)
       websocket-driver (>= 0.5.1)
+    ffi (1.9.10)
+    haml (4.0.7)
+      tilt
     http_parser.rb (0.6.0)
     multi_json (1.11.2)
-    permessage_deflate (0.1.2)
     rack (1.6.4)
     rack-protection (1.5.3)
       rack
+    rubyserial (0.2.4)
+      ffi (~> 1.9.3)
     sinatra (1.4.6)
       rack (~> 1.4)
       rack-protection (~> 1.4)
@@ -50,7 +54,8 @@ PLATFORMS
 DEPENDENCIES
   byebug
   faye
-  permessage_deflate
+  haml
+  rubyserial
   sinatra
   thin
 

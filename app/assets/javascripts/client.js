@@ -1,20 +1,21 @@
 Faye.logger = window.console;
 
-var client = new Faye.Client('http://localhost:3000/bayeux', {proxy: {headers: {'User-Agent': 'Faye'}}});
+var client = new Faye.Client('http://localhost:3000/iot', {proxy: {headers: {'User-Agent': 'Faye'}}});
 
-var subscription = client.subscribe('/chat/*', function(message) {
-  var user = message.user;
+var tbody = $('#data tbody');
 
-  var publication = client.publish('/members/' + user, {
-    user:     'node-logger',
-    message:  ' Got your message, ' + user + '!'
+var subscription = client.subscribe('/sensor', function(message) {
+  $('.success', tbody).removeClass('success');
+
+  var html = '<tr class="success">';
+
+  $.each(message.data, function(_, e){
+    html += '<td>' + e + '</td>';
   });
-  publication.callback(function() {
-    console.log('[PUBLISH SUCCEEDED]');
-  });
-  publication.errback(function(error) {
-    console.log('[PUBLISH FAILED]', error);
-  });
+
+  html += '</tr>';
+
+  tbody.prepend($(html));
 });
 
 subscription.callback(function() {

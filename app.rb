@@ -6,11 +6,7 @@ set :root, ROOT_DIR
 set :logging, false
 
 get '/' do
-  File.read(ROOT_DIR + '/public/index.html')
-end
-
-get 'faye.js' do
-  File.read(ROOT_DIR + '/public/faye.js')
+  File.read(ROOT_DIR + '/app/views/index.html')
 end
 
 get '/post' do

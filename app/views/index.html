@@ -1,0 +1,45 @@
+<!doctype html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>IFAD IoT</title>
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+    <link rel="stylesheet" href="/stylesheets/bootstrap-theme.min.css">
+    <script src="/javascripts/jquery-1.12.0.js"></script>
+    <script src="/javascripts/bootstrap.min.js"></script>
+    <script src="/javascripts/faye.js"></script>
+  </head>
+  <body>
+
+    <div class="container">
+      <h1><em>Soapbox</em> | a Twitter-style chat app</h1>
+
+      <form id="enterUsername">
+        <label for="username">Username</label>
+        <input type="text" name="username" id="username">
+        <input type="submit" value="Go">
+      </form>
+
+      <div id="app">
+        <form id="addFollowee">
+          <label for="followee">Follow</label>
+          <input type="text" name="followee" id="followee">
+          <input type="submit" value="Follow">
+        </form>
+
+        <form id="postMessage">
+          <label for="message">Post a message</label> <span id="transport"></span><br>
+          <textarea name="message" id="message" rows="3" cols="40"></textarea>
+          <input type="submit" value="Send">
+        </form>
+
+        <ul id="stream">
+        </ul>
+      </div>
+
+    </div>
+
+    <script src="/javascripts/client.js"></script>
+  </body>
+</html>

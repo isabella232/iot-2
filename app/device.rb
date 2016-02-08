@@ -18,6 +18,7 @@ class Device
     data = @serialport.gets("\n").strip
 
     if (s = data.split(';').compact).size == COLUMNS.size
+      s[1] = s[1].to_f / 1000
       s
     else
       nil

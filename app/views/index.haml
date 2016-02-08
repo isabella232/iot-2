@@ -9,9 +9,14 @@
     %link{:href => "/stylesheets/bootstrap-theme.min.css", :rel => "stylesheet"}/
     %script{:src => "/javascripts/jquery-1.12.0.js"}
     %script{:src => "/javascripts/bootstrap.min.js"}
+    %script{:src => "/javascripts/d3.v3.min.js"}
+    %script{:src => "/javascripts/nv.d3.js"}
     %script{:src => "/javascripts/faye.js"}
   %body
     .container
+      #chart
+        %svg{style: 'height: 400px; width: 100%'}
+
       %table#data.table.table-hover
         %thead
           %tr

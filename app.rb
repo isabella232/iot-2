@@ -36,3 +36,7 @@ end
 App.on(:disconnect) do |client_id|
   puts "[ DISCONNECT] #{client_id}"
 end
+
+App.on(:publish) do |client_id, channel, data|
+  puts "[ PUBLISH] #{client_id}, #{channel} => #{data}"
+end

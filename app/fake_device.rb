@@ -15,6 +15,8 @@ class FakeDevice < Device
       @data[i] = 0 if d > 360 || d < 0
     end
 
+    persist(@data)
+
     @data.map{|d| '%.2f' % d }
   end
 end

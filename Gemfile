@@ -10,3 +10,5 @@ gem 'sinatra'
 gem 'haml'
 
 gem 'rubyserial'
+
+gem 'pg'

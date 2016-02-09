@@ -51,7 +51,6 @@ var subscription = client.subscribe('/sensor', function(message) {
   tbody.prepend($(html));
 
   lineChart.update();
-  lineChart.interpolate("linear")
   barChart.update();
 });
 
@@ -91,16 +90,18 @@ nv.addGraph(function() {
 
   nv.utils.windowResize(lineChart.update);
 
+  lineChart.interpolate("monotone")
+
   return lineChart;
 });
 
 nv.addGraph(function() {
   barChart = nv.models.discreteBarChart()
-      .x(function(d) { return d.label })    //Specify the data accessors.
+      .x(function(d) { return d.label })
       .y(function(d) { return d.value })
-      .staggerLabels(true)    //Too many bars and not enough room? Try staggering labels.
-      .tooltips(false)        //Don't show tooltips
-      .showValues(true);      //...instead, show the bar value right on top of each bar.
+      .staggerLabels(true)
+      .tooltips(false)
+      .showValues(true);
 
   d3.select('#bar-chart svg')
       .datum(barData)

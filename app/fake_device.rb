@@ -9,7 +9,7 @@ class FakeDevice < Device
   def read
     r = Random.new
 
-    COLUMNS.each_with_indx do |c, i|
+    COLUMNS.each_with_index do |c, i|
       d = @data[i] += [1, -1][r.rand(2)] * r.rand(10.0)
 
       @data[i] = 0 if d > 360 || d < 0

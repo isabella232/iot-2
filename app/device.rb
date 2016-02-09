@@ -19,10 +19,11 @@ class Device
   def read
     data = @serialport.gets("\n").strip
 
-    if (s = data.split(';').compact).size == COLUMNS.size
-      s[1] = (s[1].to_f * 0.007500617) / 10 #pressure
-      s[3] = s[3].to_f / 10 #luminosity
-      s
+    if (s = data.split(';').compact.map(&:to_f)).size == COLUMNS.size
+      s[1] = (s[1] * 0.007500617) / 10 #pressure
+      s[3] = s[3] / 10 #luminosity
+
+      s.map{|d| '%.2f' % d }
     else
       nil
     end

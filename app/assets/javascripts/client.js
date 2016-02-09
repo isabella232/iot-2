@@ -4,20 +4,22 @@ var lineChart;
 var barChart;
 var measure = 0;
 var lineData = [
-  { key: 'Temperature', values: [] },
-  { key: 'Pressure',    values: [] },
-  { key: 'Humidity',    values: [] },
-  { key: 'Luminosity',  values: [], color: "#2ca02c" },
-  { key: 'Wind',        values: [] },
+  { key: 'Temperature',    values: [] },
+  { key: 'Pressure',       values: [] },
+  { key: 'Humidity',       values: [] },
+  { key: 'Luminosity',     values: [] },
+  { key: 'Wind',           values: [] },
+  { key: 'Wind direction', values: [] },
 ];
 var barData = [{
   key: 'BarChart data',
   values: [
-    { label: 'Temperature', value: 0 },
-    { label: 'Pressure',    value: 0 },
-    { label: 'Humidity',    value: 0 },
-    { label: 'Luminosity',  value: 0 },
-    { label: 'Wind',        value: 0 },
+    { label: 'Temperature',    value: 0 },
+    { label: 'Pressure',       value: 0 },
+    { label: 'Humidity',       value: 0 },
+    { label: 'Luminosity',     value: 0 },
+    { label: 'Wind',           value: 0 },
+    { label: 'Wind direction', value: 0 },
   ]
 }];
 var tbody = $('#data tbody');
@@ -44,7 +46,9 @@ var subscription = client.subscribe('/sensor', function(message) {
   html += '</tr>';
 
   tbody.prepend($(html));
+
   lineChart.update();
+  lineChart.interpolate("linear")
   barChart.update();
 });
 
@@ -84,8 +88,6 @@ nv.addGraph(function() {
 
   nv.utils.windowResize(lineChart.update);
 
-  lineChart.isArea(false)
-  lineChart.interpolate("linear")
   return lineChart;
 });
 

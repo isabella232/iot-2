@@ -4,7 +4,7 @@ class Device
   attr_accessor :port, :rate
   attr_reader :serialport
 
-  COLUMNS = [:temperature, :pressure, :humidity, :luminosity, :wind]
+  COLUMNS = [:temperature, :pressure, :humidity, :luminosity, :wind, :wind_direction]
 
   def initialize port, rate = 115200, bits = 8
     @port = port

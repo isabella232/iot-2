@@ -21,7 +21,6 @@ get '/post' do
   params[:message]
 end
 
-
 App = Faye::RackAdapter.new(Sinatra::Application,
   :mount   => '/iot',
   :timeout => 25

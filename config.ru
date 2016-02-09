@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'bundler/setup'
 
-use Rack::Static, :urls => ['/stylesheets', '/javascripts'], :root => 'app/assets'
+use Rack::Static, :urls => ['/stylesheets', '/javascripts', '/images'], :root => 'app/assets'
 
 require File.expand_path('../app', __FILE__)
 

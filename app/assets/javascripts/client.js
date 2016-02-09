@@ -4,20 +4,20 @@ var lineChart;
 var barChart;
 var measure = 0;
 var lineData = [
-  { key: 'Temperature',    values: [] },
-  { key: 'Pressure',       values: [] },
-  { key: 'Humidity',       values: [] },
-  { key: 'Luminosity',     values: [] },
-  { key: 'Wind',           values: [] },
+  { key: 'Temperature', values: [] },
+  { key: 'Pressure',    values: [] },
+  { key: 'Humidity',    values: [] },
+  { key: 'Luminosity',  values: [] },
+  { key: 'Wind',        values: [] },
 ];
 var barData = [{
   key: 'BarChart data',
   values: [
-    { label: 'Temperature',    value: 0 },
-    { label: 'Pressure',       value: 0 },
-    { label: 'Humidity',       value: 0 },
-    { label: 'Luminosity',     value: 0 },
-    { label: 'Wind',           value: 0 },
+    { label: 'Temperature', value: 0 },
+    { label: 'Pressure',    value: 0 },
+    { label: 'Humidity',    value: 0 },
+    { label: 'Luminosity',  value: 0 },
+    { label: 'Wind',        value: 0 },
   ]
 }];
 var tbody = $('#data tbody');
@@ -28,7 +28,6 @@ var subscription = client.subscribe('/sensor', function(message) {
   $('.success', tbody).removeClass('success');
 
   var html = '<tr class="success">';
-
 
   $.each(message.data, function(i, e){
     e = parseFloat(e);
@@ -46,12 +45,16 @@ var subscription = client.subscribe('/sensor', function(message) {
     }
   });
 
-
   measure += 1;
 
   html += '</tr>';
 
   tbody.prepend($(html));
+
+  var trs = $('tr', tbody);
+
+  if(trs.size() > 25)
+    trs.slice(25 - trs.size()).remove();
 
   lineChart.update();
   barChart.update();

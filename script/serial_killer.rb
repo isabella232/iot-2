@@ -1,5 +1,7 @@
-require File.expand_path('../app/client.rb', __FILE__)
-require File.expand_path('../app/device.rb', __FILE__)
+#!/usr/bin/env ruby
+
+require File.expand_path('../../app/client.rb', __FILE__)
+require File.expand_path('../../app/device.rb', __FILE__)
 
 port = ARGV[0] || '/dev/tty.usbmodemFA131'
 

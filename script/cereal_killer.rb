@@ -1,5 +1,7 @@
-require File.expand_path('../app/client.rb', __FILE__)
-require File.expand_path('../app/fake_device.rb', __FILE__)
+#!/usr/bin/env ruby
+
+require File.expand_path('../../app/client.rb', __FILE__)
+require File.expand_path('../../app/fake_device.rb', __FILE__)
 
 client = Client.new('http://localhost:3000/iot')
 

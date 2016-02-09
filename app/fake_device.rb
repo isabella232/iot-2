@@ -5,9 +5,9 @@ class FakeDevice < Device
   def self.read
     Device::COLUMNS.map do |c|
       if c == :wind_direction
-        Random.new.rand(360.0)
+        '%.2f' % Random.new.rand(360.0)
       else
-        Random.new.rand(100.0)
+        '%.2f' % Random.new.rand(100.0)
       end
     end
   end

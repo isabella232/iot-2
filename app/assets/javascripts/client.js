@@ -35,11 +35,14 @@ var subscription = client.subscribe('/sensor', function(message) {
     lineData[i].values.push({ x: measure, y: parseFloat(e) });
     barData[0].values[i].value = parseFloat(e);
 
+
     if(lineData[i].values.length > 50)
       lineData[i].values.shift();
 
     html += '<td>' + e + '</td>';
   });
+
+  $('#compass img').css('transform', 'rotate(' + (message.data[message.data.length -1]) + 'deg)');
 
   measure += 1;
 

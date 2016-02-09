@@ -1,7 +1,9 @@
 require File.expand_path('../app/client.rb', __FILE__)
 require File.expand_path('../app/device.rb', __FILE__)
 
-device = Device.new('/dev/tty.usbmodemFD121', 115200, 8)
+port = ARGV[0] || '/dev/tty.usbmodemFA131'
+
+device = Device.new(port)
 client = Client.new('http://localhost:3000/iot')
 
 while true do

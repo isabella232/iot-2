@@ -4,9 +4,9 @@ class Device
   attr_accessor :port, :rate
   attr_reader :serialport
 
-  COLUMNS = [:temperature, :humidity, :light, :preasure, :wind]
+  COLUMNS = [:temperature, :pressure, :humidity, :luminosity, :wind]
 
-  def initialize port = '/dev/tty.usbmodemFD121', rate = 115200, bits = 8
+  def initialize port, rate = 115200, bits = 8
     @port = port
     @rate = rate
     @bits = bits
@@ -18,7 +18,8 @@ class Device
     data = @serialport.gets("\n").strip
 
     if (s = data.split(';').compact).size == COLUMNS.size
-      s[1] = s[1].to_f / 1000
+      s[1] = s[1].to_f * 0.007500617 #pressure
+      s[3] = s[3].to_f / 10 #luminosity
       s
     else
       nil

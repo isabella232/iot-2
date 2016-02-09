@@ -11,16 +11,22 @@
     %script{:src => "/javascripts/bootstrap.min.js"}
     %script{:src => "/javascripts/d3.v3.min.js"}
     %script{:src => "/javascripts/nv.d3.js"}
+    %script{:src => "/javascripts/chart.js"}
     %script{:src => "/javascripts/faye.js"}
   %body
     .container
-      #chart
-        %svg{style: 'height: 400px; width: 100%'}
+      .row
+        .col-md-8
+          #line-chart
+            %svg{style: 'height: 400px; width: 100%'}
 
-      %table#data.table.table-hover
-        %thead
-          %tr
-            - Device::COLUMNS.each do |c|
-              %th= c
-        %tbody
+          %table#data.table.table-hover
+            %thead
+              %tr
+                - Device::COLUMNS.each do |c|
+                  %th= c
+            %tbody
+        .col-md-4
+          #bar-chart
+            %svg{style: 'height: 400px; width: 100%'}
     %script{:src => "/javascripts/client.js"}

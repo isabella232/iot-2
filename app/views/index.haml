@@ -24,7 +24,7 @@
           %table#data.table.table-hover
             %thead
               %tr
-                - Device::COLUMNS.each do |c|
+                - Device::TABULABLE_COLUMNS.each do |c|
                   %th= c
             %tbody
         .col-md-4

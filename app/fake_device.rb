@@ -2,13 +2,19 @@ require File.expand_path('../device.rb', __FILE__)
 
 class FakeDevice < Device
 
-  def self.read
-    Device::COLUMNS.map do |c|
-      if c == :wind_direction
-        '%.2f' % Random.new.rand(360.0)
-      else
-        '%.2f' % Random.new.rand(100.0)
-      end
+  def initialize
+    @data = [Random.new.rand(360.0)] * COLUMNS.length
+  end
+
+  def read
+    r = Random.new
+
+    COLUMNS.each_with_indx do |c, i|
+      d = @data[i] += [1, -1][r.rand(2)] * r.rand(10.0)
+
+      @data[i] = 0 if d > 360 || d < 0
     end
+
+    @data.map{|d| '%.2f' % d }
   end
 end

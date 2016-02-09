@@ -9,7 +9,6 @@ var lineData = [
   { key: 'Humidity',       values: [] },
   { key: 'Luminosity',     values: [] },
   { key: 'Wind',           values: [] },
-  { key: 'Wind direction', values: [] },
 ];
 var barData = [{
   key: 'BarChart data',
@@ -19,7 +18,6 @@ var barData = [{
     { label: 'Humidity',       value: 0 },
     { label: 'Luminosity',     value: 0 },
     { label: 'Wind',           value: 0 },
-    { label: 'Wind direction', value: 0 },
   ]
 }];
 var tbody = $('#data tbody');
@@ -31,18 +29,23 @@ var subscription = client.subscribe('/sensor', function(message) {
 
   var html = '<tr class="success">';
 
+
   $.each(message.data, function(i, e){
-    lineData[i].values.push({ x: measure, y: parseFloat(e) });
-    barData[0].values[i].value = parseFloat(e);
+    e = parseFloat(e);
 
+    if( i != message.data.length - 1 ) {
+      lineData[i].values.push({ x: measure, y: e });
+      barData[0].values[i].value = e;
+      html += '<td>' + e + '</td>';
 
-    if(lineData[i].values.length > 50)
-      lineData[i].values.shift();
+      if(lineData[i].values.length > 50)
+        lineData[i].values.shift();
 
-    html += '<td>' + e + '</td>';
+    } else {
+      $('#compass img').css('transform', 'rotate(' + e + 'deg)');
+    }
   });
 
-  $('#compass img').css('transform', 'rotate(' + (message.data[message.data.length -1]) + 'deg)');
 
   measure += 1;
 

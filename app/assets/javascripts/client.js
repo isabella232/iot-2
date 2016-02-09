@@ -4,20 +4,20 @@ var lineChart;
 var barChart;
 var measure = 0;
 var lineData = [
-  { key: 'Temperature', values: [{x: 0, y: 0}], area: false },
-  { key: 'Pressure',    values: [{x: 0, y: 0}], area: false },
-  { key: 'Humidity',    values: [{x: 0, y: 0}], area: false },
-  { key: 'Luminosity',  values: [{x: 0, y: 0}], area: false },
-  { key: 'Wind',        values: [{x: 0, y: 0}], area: false },
+  { key: 'Temperature', values: [] },
+  { key: 'Pressure',    values: [] },
+  { key: 'Humidity',    values: [] },
+  { key: 'Luminosity',  values: [], color: "#2ca02c" },
+  { key: 'Wind',        values: [] },
 ];
 var barData = [{
   key: 'BarChart data',
   values: [
-    { label: 'Temperature', value: 0},
-    { label: 'Pressure',    value: 0},
-    { label: 'Humidity',    value: 0},
-    { label: 'Luminosity',  value: 0},
-    { label: 'Wind',        value: 0},
+    { label: 'Temperature', value: 0 },
+    { label: 'Pressure',    value: 0 },
+    { label: 'Humidity',    value: 0 },
+    { label: 'Luminosity',  value: 0 },
+    { label: 'Wind',        value: 0 },
   ]
 }];
 var tbody = $('#data tbody');
@@ -80,11 +80,12 @@ nv.addGraph(function() {
 
   d3.select('#line-chart svg')
     .datum(lineData)
-    .call(lineChart)
-    ;
+    .call(lineChart);
 
   nv.utils.windowResize(lineChart.update);
 
+  lineChart.isArea(false)
+  lineChart.interpolate("linear")
   return lineChart;
 });
 

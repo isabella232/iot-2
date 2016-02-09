@@ -18,7 +18,7 @@ class Device
     data = @serialport.gets("\n").strip
 
     if (s = data.split(';').compact).size == COLUMNS.size
-      s[1] = s[1].to_f * 0.007500617 #pressure
+      s[1] = (s[1].to_f * 0.007500617) / 10 #pressure
       s[3] = s[3].to_f / 10 #luminosity
       s
     else

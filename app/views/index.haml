@@ -15,21 +15,23 @@
     %script{:src => "/javascripts/nv.d3.js"}
     %script{:src => "/javascripts/faye.js"}
   %body
-    .container
-      .row
-        .col-md-8
-          #line-chart
-            %svg{style: 'height: 400px; width: 100%'}
+    .container-fluit
+      .content
+        .row
+          .col-md-8
+            #line-chart
+              %svg{style: 'height: 400px; width: 100%'}
 
-          %table#data.table.table-hover
-            %thead
-              %tr
-                - Device::TABULABLE_COLUMNS.each do |c|
-                  %th= c
-            %tbody
-        .col-md-4
-          #bar-chart
-            %svg{style: 'height: 400px; width: 100%'}
-          #compass.text-center
-            %img{src: '/images/compass.png', style: 'width: 100%'}
+            %table#data.table.table-hover
+              %thead
+                %tr
+                  - Device.column_names.each do |c|
+                    %th= c.capitalize
+              %tbody
+          .col-md-4
+            #bar-chart
+              %svg{style: 'height: 400px; width: 100%'}
+            #wind-direction.text-center
+              %img{src: '/images/compass.png', style: 'width: 100%'}
+    %script{:src => "/columns.js"}
     %script{:src => "/javascripts/client.js"}

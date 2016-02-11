@@ -3,23 +3,16 @@ Faye.logger = window.console;
 var lineChart;
 var barChart;
 var measure = 0;
-var lineData = [
-  { key: 'Temperature', values: [] },
-  { key: 'Pressure',    values: [] },
-  { key: 'Humidity',    values: [] },
-  { key: 'Luminosity',  values: [] },
-  { key: 'Wind',        values: [] },
-];
+var lineData = [];
 var barData = [{
   key: 'BarChart data',
-  values: [
-    { label: 'Temperature', value: 0 },
-    { label: 'Pressure',    value: 0 },
-    { label: 'Humidity',    value: 0 },
-    { label: 'Luminosity',  value: 0 },
-    { label: 'Wind',        value: 0 },
-  ]
+  values: []
 }];
+
+$.each(columns, function(i,e){
+  lineData.push({key: e, values: []});
+  barData[0].values.push({label: e, value: 0});
+});
 var tbody = $('#data tbody');
 
 var client = new Faye.Client('/iot', {proxy: {headers: {'User-Agent': 'Faye'}}});
@@ -32,17 +25,17 @@ var subscription = client.subscribe('/sensor', function(message) {
   $.each(message.data, function(i, e){
     e = parseFloat(e);
 
-    if( i != message.data.length - 1 ) {
-      lineData[i].values.push({ x: measure, y: e });
-      barData[0].values[i].value = e;
-      html += '<td>' + e + '</td>';
-
-      if(lineData[i].values.length > 50)
-        lineData[i].values.shift();
-
-    } else {
-      $('#compass img').css('transform', 'rotate(' + e + 'deg)');
+    if( i == columns.indexOf('Wind direction') ) {
+      $('#wind-direction img').css('transform', 'rotate(' + e + 'deg)');
     }
+
+    lineData[i].values.push({ x: measure, y: e });
+    barData[0].values[i].value = e;
+    html += '<td>' + e + '</td>';
+
+    if(lineData[i].values.length > 50)
+      lineData[i].values.shift();
+
   });
 
   measure += 1;

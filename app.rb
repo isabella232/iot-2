@@ -13,6 +13,12 @@ get '/' do
   haml :index
 end
 
+get '/columns.js' do
+  content_type :js
+
+  erb :columns
+end
+
 get '/post' do
   env['faye.client'].publish('/mentioning/*', {
     :user => 'sinatra',

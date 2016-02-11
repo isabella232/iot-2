@@ -63,7 +63,7 @@ class Device
       r = Random.new
 
       FAKE_COLUMNS.each_with_index do |(_,v), i|
-        d = @data[COLUMNS.size + i] += [1, -1][r.rand(2)] * r.rand(0.1)
+        d = @data[COLUMNS.size + i] = (@data[COLUMNS.size + i] || r.rand(v)) + [1, -1][r.rand(2)] * r.rand(0.1)
 
         @data[COLUMNS.size + i] = r.rand(v) if d > v.last || d < v.first
       end

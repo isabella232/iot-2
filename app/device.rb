@@ -15,7 +15,7 @@ class Device
     radiation: (0.0..1.0)
   }
 
-  TABULABLE_COLUMNS   = [:temperature, :pressure, :humidity, :luminosity, :wind]
+  TABULABLE_COLUMNS   = [:temperature, :pressure, :humidity, :luminosity, :wind_speed]
   UNTABULABLE_COLUMNS = [:wind_direction]
 
   COLUMNS = TABULABLE_COLUMNS + UNTABULABLE_COLUMNS

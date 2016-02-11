@@ -10,7 +10,7 @@ var barData = [{
 }];
 
 $.each(columns, function(i,e){
-  if( !/^Wind/.test(e) ) {
+  if( e == 'Wind direction' ) {
     lineData.push({key: e, values: []});
     barData[0].values.push({label: e, value: 0});
   }
@@ -30,7 +30,7 @@ var subscription = client.subscribe('/sensor', function(message) {
 
     if( c == 'Wind direction' ) {
       $('#wind-direction img').css('transform', 'rotate(' + e + 'deg)');
-    } else if ( !/^Wind/.test(c) ) {
+    } else {
       lineData[index].values.push({ x: measure, y: e });
       barData[0].values[index].value = e;
 

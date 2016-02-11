@@ -10,7 +10,7 @@ var barData = [{
 }];
 
 $.each(columns, function(i,e){
-  if( e == 'Wind direction' ) {
+  if( e != 'Wind direction' ) {
     lineData.push({key: e, values: []});
     barData[0].values.push({label: e, value: 0});
   }

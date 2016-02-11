@@ -46,7 +46,7 @@ class Device
 
       persist(s)
 
-      s.map{d| '%.2f' % d }
+      s.map{|d| '%.2f' % d }
     else
       nil
     end

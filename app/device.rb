@@ -24,7 +24,7 @@ class Device
 
     if (s = data.split(';').compact.map(&:to_f)).size == COLUMNS.size
       s[1] = (s[1] * 0.007500617) / 10 #pressure
-      s[3] = s[3] / 10 #luminosity
+      s[3] = [0, (1.3 * (s[3] / 10) - 70)].max #luminosity
 
       persist(s)
 

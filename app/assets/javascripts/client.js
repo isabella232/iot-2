@@ -10,8 +10,10 @@ var barData = [{
 }];
 
 $.each(columns, function(i,e){
-  lineData.push({key: e, values: []});
-  barData[0].values.push({label: e, value: 0});
+  if( !/^Wind/.test(e) ) {
+    lineData.push({key: e, values: []});
+    barData[0].values.push({label: e, value: 0});
+  }
 });
 var tbody = $('#data tbody');
 
@@ -21,20 +23,24 @@ var subscription = client.subscribe('/sensor', function(message) {
   $('.success', tbody).removeClass('success');
 
   var html = '<tr class="success">';
+  var index = 0;
 
-  $.each(message.data, function(i, e){
-    e = parseFloat(e);
+  $.each(columns, function(i, c){
+    e = parseFloat(message.data[i]);
 
-    if( i == columns.indexOf('Wind direction') ) {
+    if( c == 'Wind direction' ) {
       $('#wind-direction img').css('transform', 'rotate(' + e + 'deg)');
+    } else if ( !/^Wind/.test(c) ) {
+      lineData[index].values.push({ x: measure, y: e });
+      barData[0].values[index].value = e;
+
+      if(lineData[index].values.length > 50)
+        lineData[index].values.shift();
+
+      index += 1;
     }
 
-    lineData[i].values.push({ x: measure, y: e });
-    barData[0].values[i].value = e;
     html += '<td>' + e + '</td>';
-
-    if(lineData[i].values.length > 50)
-      lineData[i].values.shift();
 
   });
 
